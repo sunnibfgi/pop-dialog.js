@@ -59,6 +59,7 @@
       this.fullHeight = !uid ? 0 : this._fullHeight()
       $(overlay).css({
         position: 'absolute',
+        zIndex: this.options.zindex || 1000000,
         width: '100%',
         top: 0,
         height: this.fullHeight
@@ -76,7 +77,7 @@
         left: '50%',
         marginLeft: '-' + width / 2 + 'px',
         marginTop: '-' + height / 2 + 'px',
-        zIndex: 100000000000000000
+        zIndex: this.options.zindex + 1
       })
     },
     show: function() {

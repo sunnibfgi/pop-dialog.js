@@ -20,7 +20,9 @@
 <script src="src/jquery-1.9.1.min.js"></script>
 <script src="src/pops.js"></script>
 <script>
-popDialog($('[data-id=pop-dialog-a]'))
+popDialog($('[data-id=pop-dialog-a]'), {
+zindex:1000
+})
 popDialog($('[data-id=pop-dialog-b]'))
 
 </script>

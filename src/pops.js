@@ -10,6 +10,7 @@
     this.body = $(document.body)
     this.window = $(window)
     this.fullHeight = 0
+    this.timer = null
     this.options = $.extend({}, this.options)
     $.extend(!0, this.options, options)
     this.init()
@@ -32,9 +33,12 @@
       var overlay = this.options.overlay;
       this.fullHeight = this._fullHeight()
       if (uid && !$(overlay).hasClass('hide')) {
-        $(overlay).css({
-          height: this.fullHeight
-        })
+        this.timer = setTimeout($.proxy(function() {
+          clearTimeout(this.timer)
+          $(overlay).css({
+            height: this.fullHeight
+          })
+        }, this), 20)
       }
     },
     resizeHandler: function(uid) {

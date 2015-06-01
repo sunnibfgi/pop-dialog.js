@@ -7,7 +7,7 @@
       return new popDialog(el, options)
     }
     this.el = el
-    this.parent = $(document.body)
+    this.body = $(document.body)
     this.window = $(window)
     this.fullHeight = 0
     this.options = $.extend({}, this.options)
@@ -23,7 +23,7 @@
     },
     init: function() {
       var $this = this.el
-      this.parent.on('click', $.proxy(function(e) {
+      this.body.on('click', $.proxy(function(e) {
         this.clickHandler($this, e)
       }, this))
     },
@@ -39,7 +39,7 @@
       }, this))
     },
     _fullHeight: function() {
-      return this.parent.height() > this.window.height() ? this.parent.height() : this.window.height()
+      return this.body.height() > this.window.height() ? this.body.height() : this.window.height()
     },
     clickHandler: function(el, e) {
       var target = e.target

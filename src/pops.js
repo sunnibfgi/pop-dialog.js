@@ -30,13 +30,16 @@
     },
     resizeHeight: function(uid) {
       var overlay = this.options.overlay;
+      this.fullHeight = this._fullHeight()
+      if (uid && !$(overlay).hasClass('hide')) {
+        $(overlay).css({
+          height: this.fullHeight
+        })
+      }
+    },
+    resizeHandler: function(uid) {
       this.window.on('resize', $.proxy(function() {
-        this.fullHeight = this._fullHeight()
-        if (uid && !$(overlay).hasClass('hide')) {
-          $(this.options.overlay).css({
-            height: this.fullHeight
-          })
-        }
+        this.resizeHeight(uid)
       }, this))
     },
     _fullHeight: function() {
@@ -78,8 +81,7 @@
         left: '50%',
         marginLeft: '-' + width / 2 + 'px',
         marginTop: '-' + height / 2 + 'px',
-        zIndex: this.options.zindex+1
-          
+        zIndex: this.options.zindex + 1
       })
     },
     show: function() {
@@ -87,7 +89,7 @@
       var id = $('#' + $this.data('id'))
       id.removeClass('hide')
       this.setOverlay(1)
-      this.resizeHeight(1)
+      this.resizeHandler(1)
       this.adjustPosition()
       this.options.showCallback.call(this, id, this)
     },

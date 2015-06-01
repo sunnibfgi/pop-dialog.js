@@ -1,8 +1,9 @@
+//pops.js
 ;(function() {
   'use strict';
 
   function popDialog(el, options) {
-    if(!(this instanceof popDialog)) {
+    if (!(this instanceof popDialog)) {
       return new popDialog(el, options)
     }
     this.el = el
@@ -30,7 +31,7 @@
       var overlay = this.options.overlay;
       this.window.on('resize', $.proxy(function() {
         this.fullHeight = this._fullHeight()
-        if(uid && !$(overlay).hasClass('hide')) {
+        if (uid && !$(overlay).hasClass('hide')) {
           $(this.options.overlay).css({
             height: this.fullHeight
           })
@@ -42,24 +43,20 @@
     },
     clickHandler: function(el, e) {
       var target = e.target
-      if(target == el[0]) {
+      if (target == el[0]) {
         e.preventDefault()
         $.each(el, $.proxy(function(i, el) {
           this.show()
         }, this))
       }
-      if($(target).closest(this.options.overlay).length || $(target).data('close') != undefined) {
+      if ($(target).closest(this.options.overlay).length || $(target).data('close') != undefined) {
         e.preventDefault()
         this.hide()
       }
     },
     setOverlay: function(uid) {
       var overlay = this.options.overlay;
-      if(!uid) {
-        this.fullHeight = 0
-      } else {
-        this.fullHeight = this._fullHeight()
-      }
+      this.fullHeight = !uid ? 0 : this._fullHeight()
       $(overlay).css({
         position: 'absolute',
         width: '100%',
@@ -89,7 +86,7 @@
       this.setOverlay(1)
       this.resizeHeight(1)
       this.adjustPosition()
-      this.options.showCallback(id, this)
+      this.options.showCallback.call(this, id, this)
     },
     hide: function() {
       var $this = this.el
@@ -97,7 +94,7 @@
       id.addClass('hide')
       this.setOverlay(0)
       this.fullHeight = 0
-      this.options.hideCallback(id, this)
+      this.options.hideCallback.call(this, id, this)
     }
   }
   $.fn.popDialog = function(options) {

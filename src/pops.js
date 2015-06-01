@@ -77,6 +77,8 @@
         left: '50%',
         marginLeft: '-' + width / 2 + 'px',
         marginTop: '-' + height / 2 + 'px',
+        zIndex: this.options.zindex ? this.options.zindex + 1 : 1000000 + 1
+          
       })
     },
     show: function() {

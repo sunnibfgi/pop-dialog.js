@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+	<title>dialog demo</title>
+	<style>
+	* { margin:0; padding:0; list-style:none}
+.hide { display:none}
+.overlay-layer { background:#000; opacity:.4; filter:alpha(opacity=40)}
+.pop-dialog { width:400px; height:150px; border-radius:5px; background:#fff;}
+</style>
+</head>
+
+<body>
+	<button data-id="pop-dialog">click me</button>
+	<div id="overlay-layer" class="overlay-layer"></div>
+	<div id="pop-dialog" class="pop-dialog"></div>
+	<script src="src/jquery-1.9.1.min.js"></script>
+	<script src="src/pops.js"></script>
+	<script>
+		$('[data-id=pop-dialog]').popDialog()
+
+	</script>
+</body>
+</html>

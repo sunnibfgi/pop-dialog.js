@@ -1,5 +1,5 @@
 //pops.js
-;(function() {
+;(function($, undefined) {
   'use strict';
 
   function popDialog(el, options) {
@@ -104,4 +104,4 @@
     })
   }
   window.popDialog = popDialog
-})()
+})(window.jQuery)

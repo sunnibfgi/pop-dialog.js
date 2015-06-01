@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+* { margin:0; padding:0}
+.hide { display:none}
+.overlay-layer { background:#000; opacity:.4; filter:alpha(opacity=40)}
+.pop-dialog { width:400px; height:150px; border-radius:5px; background:#fff;}
+</style>
+</head>
+
+<body>
+<button data-id="pop-dialog-a">click me</button>	
+<button data-id="pop-dialog-b">click me</button>
+<div id="overlay-layer" class="overlay-layer"></div>
+<div class="pop-dialog hide" id="pop-dialog-a" style="background:tomato"></div>
+<div class="pop-dialog hide" id="pop-dialog-b" style="background:yellowgreen"></div>
+<script src="src/jquery-1.9.1.min.js"></script>
+<script src="src/pops.js"></script>
+<script>
+popDialog($('[data-id=pop-dialog-a]'))
+popDialog($('[data-id=pop-dialog-b]'))
+
+</script>
+
+</body>
+</html>

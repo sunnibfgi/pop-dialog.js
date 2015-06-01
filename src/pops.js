@@ -18,6 +18,7 @@
     constructor: popDialog,
     options: {
       overlay: '#overlay-layer',
+      zindex: 10000,
       showCallback: function() {},
       hideCallback: function() {}
     },
@@ -59,7 +60,7 @@
       this.fullHeight = !uid ? 0 : this._fullHeight()
       $(overlay).css({
         position: 'absolute',
-        zIndex: this.options.zindex || 1000000,
+        zIndex: this.options.zindex,
         width: '100%',
         top: 0,
         height: this.fullHeight
@@ -77,7 +78,7 @@
         left: '50%',
         marginLeft: '-' + width / 2 + 'px',
         marginTop: '-' + height / 2 + 'px',
-        zIndex: this.options.zindex ? this.options.zindex + 1 : 1000000 + 1
+        zIndex: this.options.zindex+1
           
       })
     },

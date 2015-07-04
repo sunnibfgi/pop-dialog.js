@@ -36,7 +36,7 @@
       this.fullHeight = this._fullHeight()
       if(uid && !$(overlay).hasClass('hide')) {
         this.timer = setTimeout($.proxy(function() {
-          clearTimeout(this.timer)
+          this.timer && clearTimeout(this.timer)
           $(overlay).css({
             height: this.fullHeight
           })

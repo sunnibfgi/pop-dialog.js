@@ -1,7 +1,6 @@
 //pops.js
 
 ;(function($, undefined) {
-	
   'use strict';
 
   function popDialog(el, options) {
@@ -35,7 +34,7 @@
       var overlay = this.options.overlay
       this.fullHeight = this._fullHeight()
       if(uid && !$(overlay).hasClass('hide')) {
-		this.timer && clearTimeout(this.timer)
+        this.timer && clearTimeout(this.timer)
         this.timer = setTimeout($.proxy(function() {
           $(overlay).css({
             height: this.fullHeight

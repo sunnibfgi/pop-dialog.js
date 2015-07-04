@@ -1,9 +1,11 @@
 //pops.js
+
 ;(function($, undefined) {
+	
   'use strict';
 
   function popDialog(el, options) {
-    if (!(this instanceof popDialog)) {
+    if(!(this instanceof popDialog)) {
       return new popDialog(el, options)
     }
     this.el = el
@@ -29,21 +31,22 @@
         this.clickHandler($this, e)
       }, this))
     },
-    resizeHeight: function(uid) {
-      var overlay = this.options.overlay;
+    resizeHandler: function(uid) {
+      var overlay = this.options.overlay
       this.fullHeight = this._fullHeight()
-      if (uid && !$(overlay).hasClass('hide')) {
+      if(uid && !$(overlay).hasClass('hide')) {
         this.timer = setTimeout($.proxy(function() {
           clearTimeout(this.timer)
           $(overlay).css({
             height: this.fullHeight
           })
+          this.adjustPosition()
         }, this), 20)
       }
     },
     resizeHandler: function(uid) {
       this.window.on('resize', $.proxy(function() {
-        this.resizeHeight(uid)
+        this.resizeHandler(uid)
       }, this))
     },
     _fullHeight: function() {
@@ -51,13 +54,13 @@
     },
     clickHandler: function(el, e) {
       var target = e.target
-      if (target == el[0]) {
+      if(target == el[0]) {
         e.preventDefault()
         $.each(el, $.proxy(function(i, el) {
           this.show()
         }, this))
       }
-      if ($(target).closest(this.options.overlay).length || $(target).data('close') != undefined) {
+      if($(target).closest(this.options.overlay).length || $(target).data('close') != undefined) {
         e.preventDefault()
         this.hide()
       }

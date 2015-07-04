@@ -31,7 +31,7 @@
         this.clickHandler($this, e)
       }, this))
     },
-    resizeHandler: function(uid) {
+    resizeElement: function(uid) {
       var overlay = this.options.overlay
       this.fullHeight = this._fullHeight()
       if(uid && !$(overlay).hasClass('hide')) {
@@ -46,7 +46,7 @@
     },
     resizeHandler: function(uid) {
       this.window.on('resize', $.proxy(function() {
-        this.resizeHandler(uid)
+        this.resizeElement(uid)
       }, this))
     },
     _fullHeight: function() {

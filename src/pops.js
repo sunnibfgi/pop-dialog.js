@@ -26,7 +26,7 @@
     },
     init: function() {
       var $this = this.el
-      $(this.window.document).on('click touchstart', $.proxy(function(e) {
+      $(document).on('click touchstart', $.proxy(function(e) {
         this.clickHandler($this, e)
       }, this))
     },

@@ -26,7 +26,7 @@
     },
     init: function() {
       var $this = this.el
-      this.body.on('click', $.proxy(function(e) {
+      $(this.window.document).on('click touchstart', $.proxy(function(e) {
         this.clickHandler($this, e)
       }, this))
     },
@@ -40,6 +40,7 @@
             height: this.fullHeight
           })
           this.adjustPosition()
+		  delete this.timer
         }, this), 20)
       }
     },

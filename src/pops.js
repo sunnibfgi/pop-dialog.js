@@ -26,7 +26,11 @@
     },
     init: function() {
       var $this = this.el
+<<<<<<< HEAD
       $(document).on('click touchstart', $.proxy(function(e) {
+=======
+      this.body.on('click', $.proxy(function(e) {
+>>>>>>> parent of fa9bcd6... fixed ios click event bug
         this.clickHandler($this, e)
       }, this))
     },
@@ -40,7 +44,6 @@
             height: this.fullHeight
           })
           this.adjustPosition()
-		  delete this.timer
         }, this), 20)
       }
     },

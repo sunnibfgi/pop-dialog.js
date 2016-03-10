@@ -1,5 +1,3 @@
-//pops.js
-
 ;(function($, undefined) {
   'use strict';
 
@@ -50,7 +48,7 @@
       }, this))
     },
     _fullHeight: function() {
-      return this.body.height() > this.window.height() ? this.body.height() : this.window.height()
+      return Math.max(this.window.height(), this.body.height())
     },
     clickHandler: function(el, e) {
       var target = e.target

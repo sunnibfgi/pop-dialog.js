@@ -41,7 +41,7 @@
             height: this.fullHeight
           })
           this.adjustPosition()
-        }, this), 20)
+        }, this), 2e1)
       }
     },
     resizeHandler: function(uid) {

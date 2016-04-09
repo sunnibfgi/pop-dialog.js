@@ -81,8 +81,8 @@
       var $this = this.el
       var id = $this.data('id')
       var idElement = $('#' + id)
-      var width = idElement.outerWidth()
-      var height = idElement.outerHeight()
+      var width = idElement['outerWidth' in $.fn ? 'outerWidth' : 'width']()
+      var height = idElement['outerHeight' in $.fn ? 'outerHeight' : 'height']()
       idElement.css({
         position: 'fixed',
         top: '50%',
@@ -110,12 +110,14 @@
       this.options.hideCallback.call(this, id, this)
     }
   }
+  //transport
   $.fn.popDialog = function(options) {
     return this.each(function() {
       var $this = $(this)
       popDialog($this, options)
     })
   }
+  
   window.popDialog = popDialog
   
-})(window.jQuery)
+})(window.jQuery || window.Zepto)

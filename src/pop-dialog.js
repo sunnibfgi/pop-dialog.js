@@ -2,7 +2,7 @@
   'use strict';
 
   function popDialog(el, options) {
-    if(!(this instanceof popDialog)) {
+    if (!(this instanceof popDialog)) {
       return new popDialog(el, options)
     }
     this.el = el
@@ -14,25 +14,27 @@
     $.extend(!0, this.options, options)
     this.init()
   }
+
   popDialog.prototype = {
     constructor: popDialog,
     options: {
-      overlay: '#overlay-layer',
+      overlay: $('<div id="overlay-layer" class="overlay-layer"></div>'),
       zindex: 10000,
       showCallback: function() {},
       hideCallback: function() {}
     },
+
     init: function() {
       var $this = this.el
-
       $(document).on('click touchstart', $.proxy(function(e) {
         this.clickHandler($this, e)
       }, this))
     },
+
     resizeElement: function(uid) {
       var overlay = this.options.overlay
       this.fullHeight = this._fullHeight()
-      if(uid && !$(overlay).hasClass('hide')) {
+      if (uid && !$(overlay).hasClass('hide')) {
         this.timer && clearTimeout(this.timer)
         this.timer = setTimeout($.proxy(function() {
           $(overlay).css({
@@ -52,13 +54,13 @@
     },
     clickHandler: function(el, e) {
       var target = e.target
-      if(target == el[0]) {
+      if (target == el[0]) {
         e.preventDefault()
         $.each(el, $.proxy(function(i, el) {
           this.show()
         }, this))
       }
-      if($(target).closest(this.options.overlay).length || $(target).data('close') != undefined) {
+      if ($(target).closest(this.options.overlay).length || $(target).data('close') != undefined) {
         e.preventDefault()
         this.hide()
       }
@@ -66,13 +68,14 @@
     setOverlay: function(uid) {
       var overlay = this.options.overlay;
       this.fullHeight = !uid ? 0 : this._fullHeight()
-      $(overlay).css({
-        position: 'absolute',
-        zIndex: this.options.zindex,
-        width: '100%',
-        top: 0,
-        height: this.fullHeight
-      })[uid ? 'removeClass' : 'addClass']('hide')
+      overlay.css({
+          position: 'absolute',
+          zIndex: this.options.zindex,
+          width: '100%',
+          top: 0,
+          height: this.fullHeight
+        })[uid ? 'removeClass' : 'addClass']('hide')
+        .appendTo(this.body)
     },
     adjustPosition: function() {
       var $this = this.el
@@ -114,4 +117,5 @@
     })
   }
   window.popDialog = popDialog
+  
 })(window.jQuery)

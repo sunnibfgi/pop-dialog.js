@@ -23,6 +23,7 @@
         zindex: 10000,
         maxHeight: 200,
         hasScroll: false,
+        closeZone: 'dialog',
         showCallback: function() {},
         hideCallback: function() {}
       },
@@ -68,7 +69,9 @@
             this.show()
           }, this))
         }
-        if ($(target).closest(this.options.overlay).length || $(target).data('close') != undefined) {
+        if (($(target).closest(this.options.overlay).length &&
+          this.options.closeZone === 'overlay')
+        || $(target).data('close') != undefined) {
           e.preventDefault()
           this.hide()
         }

@@ -60,6 +60,8 @@
 
       clickHandler: function(el, e) {
         var target = e.target
+        if(el === undefined)
+          return;
         if (target == el[0]) {
           e.preventDefault()
           $.each(el, $.proxy(function(i, el) {

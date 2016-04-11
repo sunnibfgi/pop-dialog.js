@@ -22,6 +22,7 @@
         overlay: $('<div id="overlay-layer" class="overlay-layer"></div>'),
         zindex: 10000,
         maxHeight: 200,
+        hasScroll: false,
         showCallback: function() {},
         hideCallback: function() {}
       },
@@ -46,14 +47,17 @@
           }, this), 2e1)
         }
       },
+
       resizeHandler: function(uid) {
         this.window.on('resize', $.proxy(function() {
           this.resizeElement(uid)
         }, this))
       },
+
       _fullHeight: function() {
         return Math.max(this.window.height(), this.body.height())
       },
+
       clickHandler: function(el, e) {
         var target = e.target
         if (target == el[0]) {
@@ -67,6 +71,7 @@
           this.hide()
         }
       },
+
       setOverlay: function(uid) {
         var overlay = this.options.overlay;
         this.fullHeight = !uid ? 0 : this._fullHeight()
@@ -79,12 +84,20 @@
           })[uid ? 'removeClass' : 'addClass']('hide')
           .appendTo(this.body)
       },
+
       adjustPosition: function() {
         var $this = this.el
         var id = $this.data('id')
         var idElement = $('#' + id)
         var width = idElement['outerWidth' in $.fn ? 'outerWidth' : 'width']()
-        var height = Math.min(Math.max(idElement['outerHeight' in $.fn ? 'outerHeight' : 'height'](), idElement[0].scrollHeight), this.options.maxHeight)
+        var height, effect
+        if (!this.options.hasScroll) {
+          height = Math.max(idElement[0].scrollHeight, idElement['outerHeight' in $.fn ? 'outerHeight' : 'height']())
+          effect = 'inherit'
+        } else {
+          height = Math.min(Math.max(idElement[0].scrollHeight, idElement['outerHeight' in $.fn ? 'outerHeight' : 'height']()), this.options.maxHeight)
+          effect = 'auto'
+        }
         idElement.css({
           position: 'fixed',
           top: '50%',
@@ -94,10 +107,10 @@
           marginLeft: '-' + width / 2 + 'px',
           marginTop: '-' + height / 2 + 'px',
           zIndex: this.options.zindex + 1,
-          overflow: 'hidden',
-          'overflow-y': 'auto'
+          'overflow-y': status
         })
       },
+
       show: function() {
         var $this = this.el
         var id = $('#' + $this.data('id'))
@@ -107,6 +120,7 @@
         this.adjustPosition()
         this.options.showCallback.call(this, id, this)
       },
+
       hide: function() {
         var $this = this.el
         var id = $('#' + $this.data('id'))

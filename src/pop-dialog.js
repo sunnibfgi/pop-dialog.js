@@ -24,7 +24,7 @@
         zindex: 10000,
         maxHeight: 200,
         hasScroll: false,
-        closeZone: 'dialog',
+        closeZone: 'overlay',
         showCallback: function() {},
         hideCallback: function() {}
       },
@@ -103,6 +103,7 @@
           height = Math.min(Math.max(idElement[0].scrollHeight, idElement['outerHeight' in $.fn ? 'outerHeight' : 'height']()), this.options.maxHeight)
           effect = 'auto'
         }
+
         idElement.css({
           position: 'absolute',
           top: (this.window.height() - height) / 2 + 'px',
@@ -121,19 +122,22 @@
         this.setOverlay(1)
         this.resizeHandler(1)
         this.adjustPosition()
+        this.originalHeight = id['outerHeight' in $.fn ? 'outerHeight' : 'height']()
         this.options.showCallback.call(this, id, this)
       },
 
       hide: function() {
         var $this = this.el
         var id = $('#' + $this.data('id'))
-        id.addClass('hide')
+        id.addClass('hide').css({
+          height: this.originalHeight + 'px'
+        })
         this.setOverlay(0)
         this.fullHeight = 0
         this.options.hideCallback.call(this, id, this)
       }
     }
-  //transport
+    //transport
   $.fn.popDialog = function(options) {
     return this.each(function() {
       var $this = $(this)

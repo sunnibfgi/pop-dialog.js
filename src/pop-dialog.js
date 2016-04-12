@@ -23,7 +23,7 @@
         zindex: 10000,
         maxHeight: 200,
         hasScroll: false,
-        closeZone: 'overlay',
+        closeZone: 'dialog',
         showCallback: function() {},
         hideCallback: function() {}
       },
@@ -56,7 +56,7 @@
       },
 
       _fullHeight: function() {
-        return Math.max(this.window.height(), this.body.height())
+        return Math.max(this.window.height(), this.body[0].scrollHeight)
       },
 
       clickHandler: function(el, e) {
@@ -110,7 +110,7 @@
         }
 
         idElement.css({
-          position: 'absolute',
+          position: 'fixed',
           top: (this.window.height() - height) / 2 + 'px',
           left: (this.window.width() - width) / 2 + 'px',
           height: height + 'px',

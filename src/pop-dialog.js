@@ -1,4 +1,5 @@
 //pop-dialog.js
+
 ;(function($, undefined) {
   'use strict';
 
@@ -23,7 +24,7 @@
         zindex: 10000,
         maxHeight: 200,
         hasScroll: false,
-        closeZone: 'dialog',
+        closeZone: 'all',
         showCallback: function() {},
         hideCallback: function() {}
       },
@@ -70,12 +71,13 @@
             this.$el = $(el)
           }, this))
         }
+
         if (($(target).closest(this.options.overlay).length &&
-            this.options.closeZone === 'overlay') ||
+            this.options.closeZone === 'all') ||
           $(target).data('close') != undefined) {
           e.preventDefault()
-          this.hide()
           if (this.$el) {
+            this.hide()
             this.options.hideCallback.apply(this, [this.$el, $('#' + this.$el.data('id')), this])
             delete this.$el
           }

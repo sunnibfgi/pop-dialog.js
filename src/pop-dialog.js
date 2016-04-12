@@ -29,9 +29,9 @@
       },
 
       init: function() {
-        var $this = this.el
+        var $el = this.el
         $(document).on('click touchstart', $.proxy(function(e) {
-          this.clickHandler($this, e)
+          this.clickHandler($el, e)
         }, this))
       },
 

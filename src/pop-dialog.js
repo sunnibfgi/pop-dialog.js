@@ -1,5 +1,4 @@
 //pop-dialog.js
-
 ;(function($, undefined) {
   'use strict';
 
@@ -67,6 +66,8 @@
           e.preventDefault()
           $.each(el, $.proxy(function(i, el) {
             this.show()
+            this.options.showCallback.apply(this, [$(el), $('#' + $(el).data('id')), this])
+            this.$el = $(el)
           }, this))
         }
         if (($(target).closest(this.options.overlay).length &&
@@ -74,6 +75,10 @@
           $(target).data('close') != undefined) {
           e.preventDefault()
           this.hide()
+          if (this.$el) {
+            this.options.hideCallback.apply(this, [this.$el, $('#' + this.$el.data('id')), this])
+            delete this.$el
+          }
         }
       },
 
@@ -123,7 +128,6 @@
         this.resizeHandler(1)
         this.adjustPosition()
         this.originalHeight = id['outerHeight' in $.fn ? 'outerHeight' : 'height']()
-        this.options.showCallback.call(this, id, this)
       },
 
       hide: function() {
@@ -134,17 +138,16 @@
         })
         this.setOverlay(0)
         this.fullHeight = 0
-        this.options.hideCallback.call(this, id, this)
       }
     }
-    //transport
+    //transport jQuery or Zepto plugin
   $.fn.popDialog = function(options) {
-    return this.each(function() {
-      var $this = $(this)
-      popDialog($this, options)
-    })
-  }
-
+      return this.each(function() {
+        var $this = $(this)
+        popDialog($this, options)
+      })
+    }
+    //transport global
   window.popDialog = popDialog
 
 })(window.jQuery || window.Zepto)

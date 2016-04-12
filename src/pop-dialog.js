@@ -1,4 +1,5 @@
 //pop-dialog.js
+
 ;(function($, undefined) {
   'use strict';
 
@@ -61,8 +62,7 @@
 
       clickHandler: function(el, e) {
         var target = e.target
-        if(el === undefined)
-          return;
+        if (el === undefined) return;
         if (target == el[0]) {
           e.preventDefault()
           $.each(el, $.proxy(function(i, el) {
@@ -70,8 +70,8 @@
           }, this))
         }
         if (($(target).closest(this.options.overlay).length &&
-          this.options.closeZone === 'overlay')
-        || $(target).data('close') != undefined) {
+            this.options.closeZone === 'overlay') ||
+          $(target).data('close') != undefined) {
           e.preventDefault()
           this.hide()
         }
@@ -104,13 +104,11 @@
           effect = 'auto'
         }
         idElement.css({
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
+          position: 'absolute',
+          top: (this.window.height() - height) / 2 + 'px',
+          left: (this.window.width() - width) / 2 + 'px',
           height: height + 'px',
           width: width + 'px',
-          marginLeft: '-' + width / 2 + 'px',
-          marginTop: '-' + height / 2 + 'px',
           zIndex: this.options.zindex + 1,
           'overflow-y': effect
         })
@@ -135,7 +133,7 @@
         this.options.hideCallback.call(this, id, this)
       }
     }
-    //transport
+  //transport
   $.fn.popDialog = function(options) {
     return this.each(function() {
       var $this = $(this)

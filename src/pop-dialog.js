@@ -99,8 +99,7 @@
 
       adjustPosition: function() {
         var $this = this.el
-        var id = $this.data('id')
-        var idElement = $('#' + id)
+        var idElement = $('#' + $this.data('id'))
         var width = idElement['outerWidth' in $.fn ? 'outerWidth' : 'width']()
         var height, effect
         if (!this.options.hasScroll) {
@@ -143,7 +142,7 @@
       }
     }
     //transport jQuery or Zepto plugin
-  $.fn.popDialog = function(options) {
+    $.fn.popDialog = function(options) {
       return this.each(function() {
         var $this = $(this)
         popDialog($this, options)

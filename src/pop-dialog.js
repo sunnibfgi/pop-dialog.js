@@ -123,8 +123,8 @@
       },
 
       show: function() {
-        var $this = this.el
-        var id = $('#' + $this.data('id'))
+        var $el = this.el
+        var id = $('#' + $el.data('id'))
         id.removeClass('hide')
         this.setOverlay(1)
         this.resizeHandler(1)
@@ -133,8 +133,8 @@
       },
 
       hide: function() {
-        var $this = this.el
-        var id = $('#' + $this.data('id'))
+        var $el = this.el
+        var id = $('#' + $el.data('id'))
         id.addClass('hide').css({
           height: this.originalHeight + 'px'
         })

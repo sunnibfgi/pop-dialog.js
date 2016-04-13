@@ -99,8 +99,8 @@
       },
 
       adjustPosition: function() {
-        var $this = this.el
-        var idElement = $('#' + $this.data('id'))
+        var $el = this.el
+        var idElement = $('#' + $el.data('id'))
         var width = idElement['outerWidth' in $.fn ? 'outerWidth' : 'width']()
         var height, effect
         if (!this.options.hasScroll) {

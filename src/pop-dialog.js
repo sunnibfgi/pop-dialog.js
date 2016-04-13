@@ -92,6 +92,7 @@
             zIndex: this.options.zindex,
             width: '100%',
             top: 0,
+            left: 0,
             height: this.fullHeight
           })[uid ? 'removeClass' : 'addClass']('hide')
           .appendTo(this.body)

@@ -10,7 +10,7 @@
     this.el = el
     this.body = $(document.body)
     this.window = $(window)
-    this.fullHeight = 0
+    this.fullHeight = this.fullWidth = 0
     this.timer = null
     this.options = $.extend({}, this.options)
     $.extend(!0, this.options, options)
@@ -39,6 +39,7 @@
       resizeElement: function(uid) {
         var overlay = this.options.overlay
         this.fullHeight = this._fullHeight()
+        this.fullWidth = this._fullWidth()
         if (uid && !$(overlay).hasClass('hide')) {
           this.timer && clearTimeout(this.timer)
           this.timer = setTimeout($.proxy(function() {
@@ -58,6 +59,9 @@
 
       _fullHeight: function() {
         return Math.max(this.window.height(), this.body[0].scrollHeight)
+      },
+      _fullWidth: function() {
+        return Math.max(this.window.width(), this.body[0].scrollWidth)
       },
 
       clickHandler: function(el, e) {

@@ -94,7 +94,7 @@
         overlay.css({
             position: 'absolute',
             zIndex: this.options.zindex,
-            width: '100%',
+            width: this.fullWidth,
             top: 0,
             left: 0,
             height: this.fullHeight

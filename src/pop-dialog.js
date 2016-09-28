@@ -44,7 +44,8 @@
           this.timer && clearTimeout(this.timer)
           this.timer = setTimeout($.proxy(function() {
             $(overlay).css({
-              height: this.fullHeight
+              height: this.fullHeight,
+              width: this.fullWidth
             })
             this.adjustPosition()
           }, this), 2e1)
@@ -91,6 +92,7 @@
       setOverlay: function(uid) {
         var overlay = this.options.overlay;
         this.fullHeight = !uid ? 0 : this._fullHeight()
+        this.fullWidth = !uid ? 0 : this._fullWidth()
         overlay.css({
             position: 'absolute',
             zIndex: this.options.zindex,
@@ -143,7 +145,8 @@
           height: this.originalHeight + 'px'
         })
         this.setOverlay(0)
-        this.fullHeight = 0
+        this.fullHeight = this.fullWidth =0
+        
       }
     }
     //transport jQuery or Zepto plugin

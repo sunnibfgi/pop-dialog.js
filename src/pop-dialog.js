@@ -66,9 +66,9 @@
       },
 
       clickHandler: function(el, e) {
-        var target = e.target
+        var target = $(e.target)
         if (el === undefined) return;
-        if (target == el[0]) {
+        if (target.closest(el).length) {
           e.preventDefault()
           $.each(el, $.proxy(function(i, el) {
             this.show()
@@ -77,9 +77,9 @@
           }, this))
         }
 
-        if (($(target).closest(this.options.overlay).length &&
+        if ((target.closest(this.options.overlay).length &&
             this.options.closeZone === 'all') ||
-          $(target).data('close') != undefined) {
+          target.data('close') != undefined) {
           e.preventDefault()
           if (this.$el) {
             this.hide()
